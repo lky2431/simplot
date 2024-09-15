@@ -8,6 +8,7 @@ export default defineSchema({
         name: v.string(),
         nodes: v.array(v.any()),
         edges: v.array(v.any()),
+        public: v.boolean(),
         importedFiles: v.array(v.object({
             name: v.string(),
             data: v.array(v.any())

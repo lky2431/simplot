@@ -24,10 +24,15 @@ const emptyDataSet: PlotData = {
 
 }
 
+//create this function to ensure that id start with a letter
+const nnanoid = () => {
+    return "e" + nanoid()
+}
+
 
 export function AddDataSourceNode(origin: () => { x: number, y: number }) {
 
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: DataSourceData = {
         id: nodeId,
         type: 'datasource',
@@ -46,7 +51,7 @@ export function AddDataSourceNode(origin: () => { x: number, y: number }) {
 
 
 export function AddLinePlotNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: LinePlotData = {
         id: nodeId,
         type: 'lineplot',
@@ -77,7 +82,7 @@ export function AddLinePlotNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddBarPlotNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: BarPlotData = {
         id: nodeId,
         type: 'barplot',
@@ -108,7 +113,7 @@ export function AddBarPlotNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddAreaPlotNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: AreaPlotData = {
         id: nodeId,
         type: 'areaplot',
@@ -139,7 +144,7 @@ export function AddAreaPlotNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddPiePlotNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: PiePlotData = {
         id: nodeId,
         type: 'pieplot',
@@ -169,7 +174,7 @@ export function AddPiePlotNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddScatterPlotNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: ScatterPlotData = {
         id: nodeId,
         type: 'scatterplot',
@@ -199,7 +204,7 @@ export function AddScatterPlotNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddWindowNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: WindowNodeData = {
         id: nodeId,
         type: "window",
@@ -221,7 +226,7 @@ export function AddWindowNode(origin: () => { x: number, y: number }) {
 
 
 export function AddBackgroundNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: BackgroundNodeData = {
         id: nodeId,
         type: "background",
@@ -241,7 +246,7 @@ export function AddBackgroundNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddColorNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: ColorNodeData = {
         id: nodeId,
         type: "color",
@@ -257,7 +262,7 @@ export function AddColorNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddContoCatNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: ContoCatNodeData = {
         id: nodeId,
         type: "contocat",
@@ -275,7 +280,7 @@ export function AddContoCatNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddMergeNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: MergeNodeData = {
         id: nodeId,
         type: "merge",
@@ -295,7 +300,7 @@ export function AddMergeNode(origin: () => { x: number, y: number }) {
 }
 
 export function AddGlobalStyleNode(origin: () => { x: number, y: number }) {
-    const nodeId: string = nanoid()
+    const nodeId: string = nnanoid()
     const node: GlobalStyleNodeData = {
         id: nodeId,
         type: "global",

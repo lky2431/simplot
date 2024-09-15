@@ -37,14 +37,17 @@ export const Dashboard = () => {
         }
 
         return [...user_project].map((ele) => {
-            return <div className="relative w-60 h-48 rounded-2xl bg-neutral-800 border-2 border-neutral-600 hover:shadow-md hover:shadow-current hover:bg-neutral-700" onClick={() => {
-                navigate({
-                    to: `/editor/${ele._id}`
-                })
-            }}>
-                <div className="absolute m-auto inset-y-0 w-max h-max text-center inset-x-0">{ele.name}</div>
+            return <div className="relative">
 
-                <Popover >
+                <div className="relative w-60 h-48 rounded-2xl bg-neutral-800 border-2 border-neutral-600 hover:shadow-md hover:shadow-current hover:bg-neutral-700" onClick={(e) => {
+                    navigate({
+                        to: `/editor/${ele._id}`
+                    })
+                }}>
+                    <div className="absolute m-auto inset-y-0 w-max h-max text-center inset-x-0">{ele.name}</div>
+
+                </div>
+                <Popover>
                     <PopoverTrigger className="absolute right-4 top-4 rounded-full hover:bg-neutral-600 p-1"><EllipsisVertical className=" w-4 h-4" /></PopoverTrigger>
                     <PopoverContent className=" w-auto p-0 bg-red-700"><div className=" hover:bg-red-600 p-4 rounded-lg" onClick={() => {
                         remove_project({

@@ -44,17 +44,19 @@ const NewProject = () => {
     return <Button className="bg-neutral-700 text-white hover:bg-purple-300" onClick={createProject}><Plus className="h-4 w-4" />New Project</Button>
 }
 
-
-
+//create this function to ensure that id start with a letter
+const nnanoid = () => {
+    return "e" + nanoid()
+}
 
 const default_project = () => {
-    const outputId = nanoid()
-    const windowId = nanoid()
-    const colorSchemeId = nanoid()
-    const datasource1 = nanoid()
-    const datasource2 = nanoid()
-    const edge1 = nanoid()
-    const edge2 = nanoid()
+    const outputId = nnanoid()
+    const windowId = nnanoid()
+    const colorSchemeId = nnanoid()
+    const datasource1 = nnanoid()
+    const datasource2 = nnanoid()
+    const edge1 = nnanoid()
+    const edge2 = nnanoid()
 
     return {
         nodes: [

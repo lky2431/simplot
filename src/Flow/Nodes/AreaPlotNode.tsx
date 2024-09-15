@@ -19,7 +19,8 @@ import { GraphDataType } from '@/types/handleTypes';
 
 export type AreaPlotData = Node<
     {
-        dataset: PlotData
+        dataset: PlotData,
+        areaType?: AreaPlotType
     } & HandlesRef,
     'areaplot'
 >
@@ -44,18 +45,21 @@ function AreaPlotNode(props: NodeProps<AreaPlotData>) {
         shallow,
     );
 
-    const [areaPlotType, setAreaPlotType] = useState<AreaPlotType>(AreaPlotType.Seperated)
+    //const [areaPlotType, setAreaPlotType] = useState<AreaPlotType>(AreaPlotType.Seperated)
 
 
     const selfNodeData = useNodesData<AreaPlotData>(props.id)
+
+    const plotType = selfNodeData?.data.areaType ?? AreaPlotType.Seperated
+
+
+
     return PlottypeNode(props, {
         label: "Area Chart",
         children: (
             <>
-
-
                 <Select onValueChange={(value: AreaPlotType) => {
-                    setAreaPlotType(value)
+                    //setAreaPlotType(value)
                     updateNodeData(props.id, {
                         dataset: {
                             datas: selfNodeData?.data.dataset.datas.map((data) => {
@@ -64,9 +68,10 @@ function AreaPlotNode(props: NodeProps<AreaPlotData>) {
                                     stackId: value == AreaPlotType.Stacked ? props.id : undefined
                                 }
                             })
-                        }
+                        },
+                        areaType: value
                     })
-                }} defaultValue={areaPlotType}>
+                }} value={plotType}>
                     <SelectTrigger className="w-24 text-[12px]">
                         <SelectValue placeholder="Type" className='w-16 text-[12px]' ></SelectValue>
                     </SelectTrigger>
@@ -75,10 +80,7 @@ function AreaPlotNode(props: NodeProps<AreaPlotData>) {
                         <SelectItem className='text-xs' value={AreaPlotType.Stacked}>{AreaPlotType.Stacked}</SelectItem>
                     </SelectContent>
                 </Select>
-
-
             </>
-
         ),
         onDataChange: useCallback((xNodeData, yNodeData) => {
             if (xNodeData.length == 0 || yNodeData.length == 0) {
@@ -118,9 +120,7 @@ function AreaPlotNode(props: NodeProps<AreaPlotData>) {
                     dataset: xyDataSet,
                     datatype: xNodeData[0].data.datatype,
                     plottype: PlotType.Area,
-                    style: {
-                        stackId: areaPlotType == AreaPlotType.Stacked ? props.id : undefined
-                    },
+                    stackId: plotType == AreaPlotType.Stacked ? props.id : undefined,
                     id: props.id,
                     label: yNodeData[index].data.label
 
@@ -135,7 +135,7 @@ function AreaPlotNode(props: NodeProps<AreaPlotData>) {
                     datas: datas
                 }
             })
-        }, [areaPlotType]),
+        }, [plotType]),
         multiY: true
     },)
 }

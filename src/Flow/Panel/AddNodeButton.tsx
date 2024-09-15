@@ -66,7 +66,6 @@ export default function AddNodeMenu() {
                             <AddNodeButton label="Continuous to Category" action={() => {
                                 addChildNode(AddContoCatNode(pos))
                             }} />
-                            <MenubarItem>Data Processing</MenubarItem>
                         </MenubarSubContent>
                     </MenubarSub>
                     <MenubarSub>

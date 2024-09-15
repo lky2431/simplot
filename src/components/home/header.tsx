@@ -22,10 +22,13 @@ const Header = () => {
                 >
                     Document
                 </Link>
+                <Link to="/login" className="[&.active]:font-bold">
+                    <Button className="justify-self-end px-2 py-1 text-xs">
+                        Sign in
+                    </Button>
+                </Link>
 
-                <Button className="justify-self-end px-2 py-1 text-xs">
-                    Sign in
-                </Button>
+
             </div>
         </header>
     </div>

@@ -34,12 +34,15 @@ import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox"
 
 
 const projectSelector = (state: ProjectState) => ({
     name: state.name,
     id: state.id,
-    setName: state.setName
+    setName: state.setName,
+    pub: state.public,
+    setPublic: state.setPublic
 })
 
 const rfSelector = (state: RFState) => ({
@@ -75,14 +78,14 @@ const Title = styled.h6`
         margin-inline: auto; 
     `
 
-function Graph() {
+function Graph({ owned }: { owned: boolean }) {
 
     const { output, nodes, edges } = useRFStore(
         rfSelector,
         shallow
     );
 
-    const { name, id, setName } = useProjectStore(
+    const { name, id, setName, pub, setPublic } = useProjectStore(
         projectSelector,
         shallow
     )
@@ -131,7 +134,8 @@ function Graph() {
                 name: name!,
                 nodes: nodes,
                 edges: edges,
-                importedFiles: importedFiles
+                importedFiles: importedFiles,
+                pub: pub??false
             })
             toast({
                 description: "project saved",
@@ -149,13 +153,32 @@ function Graph() {
     const theme = output.data.theme
 
     let menuBar = () => {
+        if (owned) {
+            return <div className="flex justify-end absolute  gap-4  w-full bg-neutral-900 p-4 items-center">
+                <Input className="bg-none" value={name} onChange={(e) => {
+                    setName(e.currentTarget.value)
+                }} placeholder="project name" />
+                <div className="flex items-center space-x-2 border border-neutral-600 p-2 rounded-full">
+                    <Checkbox id="terms" className="w-4 h-4" checked={pub ?? false} onCheckedChange={(e) => {
+                        setPublic(e as boolean)
+                    }} />
+                    <div className="w-2" />
+                    <label
+                        htmlFor="terms"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        Public
+                    </label>
+                </div>
+                <div className=" hover:bg-neutral-700" onClick={saveProject}><Save /></div>
+                <div className=" hover:bg-neutral-700" onClick={downloadImage}><Download /></div>
+            </div>
+        }
         return <div className="flex justify-end absolute  gap-4  w-full bg-neutral-900 p-4 items-center">
-            <Input className="bg-none" value={name} onChange={(e) => {
-                setName(e.currentTarget.value)
-            }} placeholder="project name" />
-            <div className=" hover:bg-neutral-700" onClick={saveProject}><Save /></div>
+            <p className="grow">{name}</p>
             <div className=" hover:bg-neutral-700" onClick={downloadImage}><Download /></div>
         </div>
+
     }
 
     let renderData = useMemo(() => {
@@ -279,8 +302,6 @@ function Graph() {
                         })}
                     </PieChart>
                 </ResponsiveContainer>
-
-
             </AspectContainer>
         }
         return <AspectContainer theme={{

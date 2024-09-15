@@ -12,6 +12,7 @@ import useImportedFileStore, { type ImportedFilesState } from './store/fileStore
 import useProjectStore, { type ProjectState } from './store/projectStore'
 import useRFStore, { type RFState } from './store/rfStore'
 import { shallow } from 'zustand/shallow'
+import { useUser } from "@clerk/clerk-react";
 
 
 const rfSelector = (state: RFState) => ({
@@ -26,7 +27,8 @@ const fileSelector = (state: ImportedFilesState) => ({
 
 const projectSelector = (state: ProjectState) => ({
   setName: state.setName,
-  setId: state.setId
+  setId: state.setId,
+  setPublic: state.setPublic
 })
 
 
@@ -35,42 +37,62 @@ const Editor = () => {
   const params = useParams({ from: '/editor/$editorId' })
 
   const project = useQuery(api.project.get_project, { projectId: params.editorId as Id<"project"> })
+  const { user } = useUser();
+
+
 
   const { setNodes, setEdges } = useRFStore(rfSelector, shallow)
   const { setImportedFiles } = useImportedFileStore(fileSelector, shallow)
-  const { setName, setId } = useProjectStore(projectSelector, shallow)
+  const { setName, setId,setPublic } = useProjectStore(projectSelector, shallow)
 
   useEffect(() => {
     if (project == undefined || project == null) {
       return
     }
-    setEdges(project.edges)
-    setNodes(project.nodes)
-    setId(project._id)
-    setImportedFiles(project.importedFiles)
-    setName(project.name)
+    console.log(JSON.stringify(project))
+    console.log(JSON.stringify(project.project))
+    setEdges(project.project.edges)
+    setNodes(project.project.nodes)
+    setId(project.project._id)
+    setImportedFiles(project.project.importedFiles)
+    setName(project.project.name)
+    setPublic(project.project.public)
   }, [project])
 
 
 
 
   const buildContent = () => {
-    return <div className='h-screen w-screen flex font-sans'>
-      <Toaster />
-      <div className='h-full w-2/3 '>
-        <ReactFlowProvider>
-          <Flow />
-
-        </ReactFlowProvider>
+    if (project?.owned) {
+      return <div className='h-screen w-screen flex font-sans'>
         <Toaster />
-      </div>
-      <Separator />
+        <div className='h-full w-2/3 '>
+          <ReactFlowProvider>
+            <Flow />
 
-      <div className='h-full w-1/3'>
-        <Graph />
+          </ReactFlowProvider>
+          <Toaster />
+        </div>
+        <Separator />
+        <div className='h-full w-1/3'>
+          <Graph owned={true} />
+        </div>
       </div>
-    </div>
+    } else {
+      return <div className='h-screen w-screen flex font-sans'>
+        <div className='h-full w-1/3 ' />
+        <Separator />
+        <div className='h-full w-1/3'>
+          <Graph owned={false} />
+        </div>
+        <Separator />
+        <div className='h-full w-1/3 ' />
+      </div>
+    }
+
   }
+
+
 
 
 

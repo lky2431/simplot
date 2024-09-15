@@ -23,7 +23,8 @@ export const upsertFromClerk = internalMutation({
                 name: tutorial.name,
                 nodes: [...tutorial.nodes],
                 edges: [...tutorial.edges],
-                importedFiles: [...tutorial.importedFiles]
+                importedFiles: [...tutorial.importedFiles],
+                public:false
             }
             insertPool.push(ctx.db.insert("project", project))
         }

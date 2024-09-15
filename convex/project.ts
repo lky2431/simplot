@@ -54,7 +54,8 @@ export const create_project = mutation({
             userId: id,
             updatedAt: Date.now(),
             name: args.name,
-            importedFiles: args.importedFiles
+            importedFiles: args.importedFiles,
+            public: false
         })
         return project
     }
@@ -66,6 +67,7 @@ export const save_project = mutation({
         name: v.string(),
         nodes: v.array(v.any()),
         edges: v.array(v.any()),
+        pub: v.boolean(),
         importedFiles: v.array(v.object({
             name: v.string(),
             data: v.array(v.any())
@@ -82,7 +84,8 @@ export const save_project = mutation({
             edges: args.edges,
             updatedAt: Date.now(),
             name: args.name,
-            importedFiles: args.importedFiles
+            importedFiles: args.importedFiles,
+            public: args.pub
         })
     }
 })
@@ -99,10 +102,16 @@ export const remove_project = mutation({
 export const get_project = query({
     args: { projectId: v.id("project") },
     handler: async (ctx, args) => {
-
+        const identity = await ctx.auth.getUserIdentity();
+        if (identity === null) {
+            throw new Error("Not authenticated");
+        }
         const project = await ctx.db.get(args.projectId)
         if (project != null) {
-            return project
+            return {
+                project: project,
+                owned: project.userId == identity.subject
+            }
         } else {
             return null
         }

@@ -19,7 +19,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export type BarPlotData = Node<
     {
-        dataset: PlotData
+        dataset: PlotData,
+        barType: BarPlotType
     } & HandlesRef,
     'barplot'
 >
@@ -37,6 +38,8 @@ export enum BarPlotType {
 
 
 
+
+
 function BarPlotNode(props: NodeProps<BarPlotData>) {
 
     const { updateNodeData } = useRFStore(
@@ -44,31 +47,16 @@ function BarPlotNode(props: NodeProps<BarPlotData>) {
         shallow,
     );
 
-    const [barPlotType, setBarPlotType] = useState<BarPlotType>(BarPlotType.Seperated)
 
 
     const selfNodeData = useNodesData<BarPlotData>(props.id)
+    const plotType = selfNodeData?.data.barType ?? BarPlotType.Seperated
     return PlottypeNode(props, {
         label: "Bar Chart",
         children: (
             <>
-
-
-                <div className='flex w-24 justify-stretch gap-3 items-center'>
-                    <div className='grow'>
-                        <Checkbox id="terms2" />
-                    </div>
-
-                    <Label
-                        htmlFor="terms2"
-                        className="text-[9px] font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                        Show Label
-                    </Label>
-                </div>
-
                 <Select onValueChange={(value: BarPlotType) => {
-                    setBarPlotType(value)
+
                     updateNodeData(props.id, {
                         dataset: {
                             datas: selfNodeData?.data.dataset.datas.map((data) => {
@@ -77,11 +65,12 @@ function BarPlotNode(props: NodeProps<BarPlotData>) {
                                     stackId: value == BarPlotType.Stacked ? props.id : undefined
                                 }
                             })
-                        }
+                        },
+                        barType: value
                     })
-                }} defaultValue={barPlotType}>
+                }} value={plotType}>
                     <SelectTrigger className="w-24 text-[12px]">
-                        <SelectValue placeholder="Type" className='w-16 text-[12px]' defaultValue={barPlotType}></SelectValue>
+                        <SelectValue placeholder="Type" className='w-16 text-[12px]' defaultValue={plotType}></SelectValue>
                     </SelectTrigger>
                     <SelectContent className='px-2'>
                         <SelectItem className='text-xs' value={BarPlotType.Seperated}>{BarPlotType.Seperated}</SelectItem>
@@ -94,7 +83,6 @@ function BarPlotNode(props: NodeProps<BarPlotData>) {
         ),
         onDataChange: useCallback((xNodeData, yNodeData) => {
             if (xNodeData.length == 0 || yNodeData.length == 0) {
-                //removeOutput()
                 return
             }
 
@@ -130,9 +118,7 @@ function BarPlotNode(props: NodeProps<BarPlotData>) {
                     dataset: xyDataSet,
                     datatype: GraphDataType.categoricalData,
                     plottype: PlotType.Bar,
-                    style: {
-                        stackID: barPlotType == BarPlotType.Stacked ? props.id : undefined
-                    },
+                    stackId: plotType == BarPlotType.Stacked ? props.id : undefined,
                     id: props.id,
                     label: yNodeData[index].data.label
                 }
@@ -142,7 +128,7 @@ function BarPlotNode(props: NodeProps<BarPlotData>) {
                     datas: datas
                 }
             })
-        }, [barPlotType]),
+        }, [plotType]),
         multiY: true
     })
 }
