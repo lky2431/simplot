@@ -127,15 +127,13 @@ function PiePlotNode(props: NodeProps<PiePlotData>) {
             }
             let xDataSet: any[] = xNodeData[0].data.dataset as any[]
             let yDataSet: any[] = yNodeData[0].data.dataset as any[]
-            console.log(`x${xDataSet.length} y${yDataSet.length}`)
+            
             if (xDataSet.length > yDataSet.length) {
                 xDataSet = xDataSet.slice(0, yDataSet.length)
 
             } else if (xDataSet.length < yDataSet.length) {
                 yDataSet = yDataSet.slice(0, xDataSet.length)
-
             }
-            console.log(`${JSON.stringify(xDataSet)} ${JSON.stringify(yDataSet)}`)
             let xyDataSet: any[] = []
             for (let i in xDataSet) {
                 xyDataSet.push({

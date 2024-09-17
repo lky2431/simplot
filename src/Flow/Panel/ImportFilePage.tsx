@@ -9,12 +9,13 @@ import useImportedFileStore, { ImportedFilesState } from "@/store/fileStore";
 
 const selector = (state: ImportedFilesState) => ({
     importedFile: state.importedFiles,
-    addImportedFile: state.addImportedFiles
+    addImportedFile: state.addImportedFiles,
+    replaceImportedFile: state.replaceImportFiles
 });
 
 
 function ImportFilePage() {
-    let { importedFile, addImportedFile } = useImportedFileStore(selector)
+    let { importedFile, addImportedFile, replaceImportedFile } = useImportedFileStore(selector)
 
 
 
@@ -22,8 +23,15 @@ function ImportFilePage() {
         if (file == null) {
             return
         }
-        for (let i in importedFile) {
+        for (let i = 0; i < importedFile.length; i++) {
             if (importedFile[i].name == file.name) {
+                Papa.parse(file, {
+                    header: false,
+                    dynamicTyping: true,
+                    complete: (results) => {
+                        replaceImportedFile({ name: file.name, data: results.data }, i)
+                    }
+                })
                 return
             }
         }

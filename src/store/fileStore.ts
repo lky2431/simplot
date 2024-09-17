@@ -4,6 +4,7 @@ import { devtools } from 'zustand/middleware'
 
 export type ImportedFilesState = {
     importedFiles: ImportedFile[];
+    replaceImportFiles: (file: ImportedFile, i: number) => void;
     addImportedFiles: (file: ImportedFile) => void;
     clearImportedFiles: () => void;
     setImportedFiles: (files: ImportedFile[]) => void
@@ -17,8 +18,13 @@ const useImportedFileStore = create<ImportedFilesState>(((set, get) => ({
         set({
             importedFiles: [...get().importedFiles, file]
         })
-        console.log(JSON.stringify(get().importedFiles))
-
+    },
+    replaceImportFiles: (file, i) => {
+        const _im = get().importedFiles
+        _im[i] = file
+        set({
+            importedFiles: _im
+        })
     },
     clearImportedFiles: () => {
         set({

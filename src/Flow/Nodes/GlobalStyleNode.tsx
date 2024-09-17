@@ -72,8 +72,8 @@ function GlobalStyleNode(props: NodeProps<GlobalStyleNodeData>) {
             <DialogTrigger>
                 <div className='w-20 h-4 grid grid-cols-5'>
                     {
-                        PresetSchemeCSS[selfNodeData.data.colorScheme].map((ele) => {
-                            return <ColorBlock className="w-4" theme={{
+                        PresetSchemeCSS[selfNodeData.data.colorScheme].map((ele, index) => {
+                            return <ColorBlock key={index} className="w-4" theme={{
                                 backgroundColor: ele
                             }} />
                         })
@@ -90,16 +90,16 @@ function GlobalStyleNode(props: NodeProps<GlobalStyleNodeData>) {
                     </DialogDescription>
                     <ScrollArea className='h-72'>
                         {
-                            [PresetScheme.default, PresetScheme.red, PresetScheme.orange, PresetScheme.yellow, PresetScheme.lime, PresetScheme.emerald, PresetScheme.cyan, PresetScheme.blue, PresetScheme.violet, PresetScheme.fuchsia, PresetScheme.rose, PresetScheme.neutral].map((e) => {
-                                return <div className='flex w-80 my-4 justify-center' onClick={() => {
+                            [PresetScheme.default, PresetScheme.red, PresetScheme.orange, PresetScheme.yellow, PresetScheme.lime, PresetScheme.emerald, PresetScheme.cyan, PresetScheme.blue, PresetScheme.violet, PresetScheme.fuchsia, PresetScheme.rose, PresetScheme.neutral].map((e,i) => {
+                                return <div className='flex w-80 my-4 justify-center' key={i} onClick={() => {
                                     updateNodeData(props.id, {
                                         colorScheme: e
                                     })
                                     setDialogOpen(false)
                                 }}>
                                     {
-                                        PresetSchemeCSS[e].map((color) => {
-                                            return <ColorBlock className={`w-8 h-8`} theme={{
+                                        PresetSchemeCSS[e].map((color, index) => {
+                                            return <ColorBlock className={`w-8 h-8`} key={index} theme={{
                                                 backgroundColor: color
                                             }} />
                                         })

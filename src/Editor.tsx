@@ -46,8 +46,6 @@ const Editor = () => {
     if (project == undefined || project == null) {
       return
     }
-    console.log(JSON.stringify(project))
-    console.log(JSON.stringify(project.project))
     setEdges(project.project.edges)
     setNodes(project.project.nodes)
     setId(project.project._id)

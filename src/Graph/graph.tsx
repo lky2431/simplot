@@ -122,13 +122,7 @@ function Graph({ owned }: { owned: boolean }) {
     const saveProject = async () => {
 
         if (name) {
-            console.log({
-                id: id as Id<"project">,
-                name: name!,
-                nodes: nodes,
-                edges: edges,
-                importedFiles: importedFiles
-            })
+
             await saveNewProject({
                 id: id as Id<"project">,
                 name: name!,
@@ -141,9 +135,7 @@ function Graph({ owned }: { owned: boolean }) {
                 description: "project saved",
                 variant: "default"
             })
-        } else {
-            console.log("no name")
-        }
+        } 
     }
 
     const datas: any[] = output.data.dataset.datas

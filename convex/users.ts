@@ -14,7 +14,7 @@ export const upsertFromClerk = internalMutation({
             .query("tutorial")
             .collect()
         let insertPool = []
-        console.log(`tutorial: ${tutorials}`)
+        
         for (let i in tutorials) {
             let tutorial = tutorials[i]
             let project = {

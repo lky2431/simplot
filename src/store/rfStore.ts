@@ -110,7 +110,6 @@ const useRFStore = create<RFState>()(
                     return node;
                 }),
             });
-            console.log(get().nodes)
         },
 
         getNodeById: (nodeId: string) => {

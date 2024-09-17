@@ -37,8 +37,8 @@ export const Dashboard = () => {
             return <Label>no project is found</Label>
         }
 
-        return [...user_project].map((ele) => {
-            return <div className="relative">
+        return [...user_project].map((ele, i) => {
+            return <div className="relative" key={i}>
 
                 <div className="relative w-60 h-48 rounded-2xl bg-neutral-800 border-2 border-neutral-600 hover:shadow-md hover:shadow-current hover:bg-neutral-700" onClick={(e) => {
                     navigate({

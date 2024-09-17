@@ -84,7 +84,7 @@ function Flow() {
                 const source = getNodeById(connection.source) as HandleNode
                 const target = getNodeById(connection.target) as HandleNode
                 if (source && target && connection.sourceHandle && connection.targetHandle) {
-                    console.log(`${source.id} ${JSON.stringify(source.data)} ${connection.sourceHandle}`)
+                    
                     let checker: string | null = GraphDataCompatChecker(source, target, connection.sourceHandle, connection.targetHandle)
                     if (checker != null) {
                         toast({

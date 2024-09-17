@@ -45,7 +45,6 @@ export default function AddNodeMenu() {
 
     const pos = () => {
         const view: Viewport = reactFlow.getViewport()
-        console.log(JSON.stringify(view))
         return { x: -(view.x - 50) / view.zoom, y: -(view.y - 50) / view.zoom }
 
     }

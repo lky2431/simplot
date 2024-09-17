@@ -8,6 +8,7 @@ export const Route = createFileRoute('/doc/start')({
     <br />
     <p>Let get familar with the canvas first.</p>
     <p>Let create a free accout and login. A dashboard with sample project will be shown. Press the '1. Get Started'.</p>
+    <p>You may also need some sample data to import. Let download it in "https://github.com/lky2431/simplot/tree/main/sample_data"</p>
     <p>You can see that the screen is divided into two section. The left bigger part is node based editor. The right part is chart preview.</p>
     <img src='/images/getstart/split.png' className='h-48' />
     <p>You can see two small button in left bottom corner. The upper one is button to add node. The another one is data import.</p>

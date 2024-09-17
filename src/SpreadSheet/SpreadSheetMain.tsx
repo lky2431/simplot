@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import useRFStore, { RFState } from "@/store/rfStore";
 import { shallow } from "zustand/shallow";
 import { DataSourceData } from "@/Flow/Nodes/DataSourceNode";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 
 const fileSelector = (state: ImportedFilesState) => ({
@@ -47,7 +48,7 @@ function SpreadSheetMain({ dataUpdate, onSelectionChange, currentSelection, id }
 
     useEffect(() => {
         if (nodeData?.data.file != null) {
- 
+
             let d: any[] = nodeData?.data.file.data.map((row: any, x: number) =>
                 row.map((item: any, y: number) => {
                     return {
@@ -80,7 +81,6 @@ function SpreadSheetMain({ dataUpdate, onSelectionChange, currentSelection, id }
     }, [cellSelection])
 
     const RangeSelectionHandler = (selection: RangeSelection) => {
-        //console.log(selection)
         const sameRow: boolean = selection.range.end.row == selection.range.start.row
         const sameColumn: boolean = selection.range.end.column == selection.range.start.column
         if ((!sameRow) && (!sameColumn)) {
@@ -135,7 +135,7 @@ function SpreadSheetMain({ dataUpdate, onSelectionChange, currentSelection, id }
 
     return <div className="flex flex-col gap-4 grow">
 
-        <div className="basis-1/6 gap-2 flex flex-initial mt-4">
+        <div className="h-32 gap-2 flex flex-initial mt-4">
             {
                 importedFile.length > 0 ?
                     importedFile.map((file) => {
@@ -155,7 +155,7 @@ function SpreadSheetMain({ dataUpdate, onSelectionChange, currentSelection, id }
         </div>
         <Separator />
 
-        <div className="basis-5/6 flex gap-4">
+        <div className="grow flex gap-4 items-stretch">
             <div className="gap-2 rounded-lg p-4 flex flex-col min-w-48 max-w-64 items-start text-start min-h-36">
                 <Label>Please select a range of cell in a single column or row</Label>
                 {resultData && <Label>Number of item: {resultData.length}</Label>}
@@ -163,7 +163,7 @@ function SpreadSheetMain({ dataUpdate, onSelectionChange, currentSelection, id }
             </div>
             <Separator orientation="vertical" />
             {
-                sheetData != null && <SpreadSheet<CellBase>
+                sheetData != null && <ScrollArea className="h-[calc(100vh-18rem)]"><SpreadSheet<CellBase>
 
                     data={sheetData}
                     onSelect={(selected: Selection) => {
@@ -178,10 +178,11 @@ function SpreadSheetMain({ dataUpdate, onSelectionChange, currentSelection, id }
 
 
                 ></SpreadSheet>
+                </ScrollArea>
 
             }
 
-            
+
         </div>
     </div>
 
