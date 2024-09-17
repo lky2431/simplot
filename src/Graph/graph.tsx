@@ -135,7 +135,7 @@ function Graph({ owned }: { owned: boolean }) {
                 nodes: nodes,
                 edges: edges,
                 importedFiles: importedFiles,
-                pub: pub??false
+                pub: pub ?? false
             })
             toast({
                 description: "project saved",

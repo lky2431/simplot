@@ -37,9 +37,6 @@ const Editor = () => {
   const params = useParams({ from: '/editor/$editorId' })
 
   const project = useQuery(api.project.get_project, { projectId: params.editorId as Id<"project"> })
-  const { user } = useUser();
-
-
 
   const { setNodes, setEdges } = useRFStore(rfSelector, shallow)
   const { setImportedFiles } = useImportedFileStore(fileSelector, shallow)
@@ -59,14 +56,11 @@ const Editor = () => {
     setPublic(project.project.public)
   }, [project])
 
-
-
-
   const buildContent = () => {
     if (project?.owned) {
       return <div className='h-screen w-screen flex font-sans'>
         <Toaster />
-        <div className='h-full w-2/3 '>
+        <div className='h-full grow '>
           <ReactFlowProvider>
             <Flow />
 
@@ -74,7 +68,7 @@ const Editor = () => {
           <Toaster />
         </div>
         <Separator />
-        <div className='h-full w-1/3'>
+        <div className='h-full w-[600px] min-w-[600px]'>
           <Graph owned={true} />
         </div>
       </div>
@@ -82,24 +76,18 @@ const Editor = () => {
       return <div className='h-screen w-screen flex font-sans'>
         <div className='h-full w-1/3 ' />
         <Separator />
-        <div className='h-full w-1/3'>
-          <Graph owned={false} />
+        <div className='h-full w-1/3 flex justify-center'>
+          <div className="h-full w-[600px] min-w-[600px]">
+            <Graph owned={false} />
+          </div>
         </div>
         <Separator />
         <div className='h-full w-1/3 ' />
       </div>
     }
-
   }
 
-
-
-
-
   return project ? buildContent() : <div>Loading...</div>
-
-
-
 }
 
 export default Editor

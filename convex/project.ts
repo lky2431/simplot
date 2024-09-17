@@ -108,12 +108,14 @@ export const get_project = query({
         }
         const project = await ctx.db.get(args.projectId)
         if (project != null) {
-            return {
-                project: project,
-                owned: project.userId == identity.subject
+            if (project.public) {
+                return {
+                    project: project,
+                    owned: project.userId == identity.subject
+                }
             }
-        } else {
-            return null
         }
+        return null
+
     }
 })
