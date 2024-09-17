@@ -43,7 +43,7 @@ const Editor = () => {
 
   const { setNodes, setEdges } = useRFStore(rfSelector, shallow)
   const { setImportedFiles } = useImportedFileStore(fileSelector, shallow)
-  const { setName, setId,setPublic } = useProjectStore(projectSelector, shallow)
+  const { setName, setId, setPublic } = useProjectStore(projectSelector, shallow)
 
   useEffect(() => {
     if (project == undefined || project == null) {

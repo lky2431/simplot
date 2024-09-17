@@ -82,6 +82,7 @@ function BarPlotNode(props: NodeProps<BarPlotData>) {
 
         ),
         onDataChange: useCallback((xNodeData, yNodeData) => {
+      
             if (xNodeData.length == 0 || yNodeData.length == 0) {
                 return
             }

@@ -13,6 +13,11 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as DocStylingImport } from './routes/doc.styling'
+import { Route as DocStartImport } from './routes/doc.start'
+import { Route as DocConceptImport } from './routes/doc.concept'
+import { Route as DocAllImport } from './routes/doc.all'
+import { Route as DocAdvancedImport } from './routes/doc.advanced'
 
 // Create Virtual Routes
 
@@ -51,6 +56,31 @@ const EditorEditorIdLazyRoute = EditorEditorIdLazyImport.update({
   import('./routes/editor.$editorId.lazy').then((d) => d.Route),
 )
 
+const DocStylingRoute = DocStylingImport.update({
+  path: '/doc/styling',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocStartRoute = DocStartImport.update({
+  path: '/doc/start',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocConceptRoute = DocConceptImport.update({
+  path: '/doc/concept',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocAllRoute = DocAllImport.update({
+  path: '/doc/all',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocAdvancedRoute = DocAdvancedImport.update({
+  path: '/doc/advanced',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -83,6 +113,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
+    '/doc/advanced': {
+      id: '/doc/advanced'
+      path: '/doc/advanced'
+      fullPath: '/doc/advanced'
+      preLoaderRoute: typeof DocAdvancedImport
+      parentRoute: typeof rootRoute
+    }
+    '/doc/all': {
+      id: '/doc/all'
+      path: '/doc/all'
+      fullPath: '/doc/all'
+      preLoaderRoute: typeof DocAllImport
+      parentRoute: typeof rootRoute
+    }
+    '/doc/concept': {
+      id: '/doc/concept'
+      path: '/doc/concept'
+      fullPath: '/doc/concept'
+      preLoaderRoute: typeof DocConceptImport
+      parentRoute: typeof rootRoute
+    }
+    '/doc/start': {
+      id: '/doc/start'
+      path: '/doc/start'
+      fullPath: '/doc/start'
+      preLoaderRoute: typeof DocStartImport
+      parentRoute: typeof rootRoute
+    }
+    '/doc/styling': {
+      id: '/doc/styling'
+      path: '/doc/styling'
+      fullPath: '/doc/styling'
+      preLoaderRoute: typeof DocStylingImport
+      parentRoute: typeof rootRoute
+    }
     '/editor/$editorId': {
       id: '/editor/$editorId'
       path: '/editor/$editorId'
@@ -100,6 +165,11 @@ export const routeTree = rootRoute.addChildren({
   AboutLazyRoute,
   DashboardLazyRoute,
   LoginLazyRoute,
+  DocAdvancedRoute,
+  DocAllRoute,
+  DocConceptRoute,
+  DocStartRoute,
+  DocStylingRoute,
   EditorEditorIdLazyRoute,
 })
 
@@ -115,6 +185,11 @@ export const routeTree = rootRoute.addChildren({
         "/about",
         "/dashboard",
         "/login",
+        "/doc/advanced",
+        "/doc/all",
+        "/doc/concept",
+        "/doc/start",
+        "/doc/styling",
         "/editor/$editorId"
       ]
     },
@@ -129,6 +204,21 @@ export const routeTree = rootRoute.addChildren({
     },
     "/login": {
       "filePath": "login.lazy.tsx"
+    },
+    "/doc/advanced": {
+      "filePath": "doc.advanced.tsx"
+    },
+    "/doc/all": {
+      "filePath": "doc.all.tsx"
+    },
+    "/doc/concept": {
+      "filePath": "doc.concept.tsx"
+    },
+    "/doc/start": {
+      "filePath": "doc.start.tsx"
+    },
+    "/doc/styling": {
+      "filePath": "doc.styling.tsx"
     },
     "/editor/$editorId": {
       "filePath": "editor.$editorId.lazy.tsx"

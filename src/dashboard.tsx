@@ -8,6 +8,7 @@ import { Plus } from "lucide-react"
 import { useEffect, useState } from "react";
 import { Skeleton } from "./components/ui/skeleton";
 import NewProject from "./components/NewProject";
+import { Link } from "@tanstack/react-router";
 import { EllipsisVertical } from "lucide-react";
 import {
     Popover,
@@ -61,9 +62,24 @@ export const Dashboard = () => {
     }
 
     return <div className="flex flex-col w-screen items-center">
-        <div className="flex justify-between items-center px-4 py-2 w-full">
+        <div className="flex justify-between items-be px-4 py-2 w-full">
             <Label className="text-md font-bold">Projects</Label>
-            <UserButton />
+            <div className="flex justify-end gap-2">
+                <Link
+                    to="/"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+                >
+                    Home
+                </Link>
+                <Link
+                    to="/doc/concept"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+                >
+                    Document
+                </Link>
+                <UserButton />
+            </div>
+
         </div>
         <Separator />
         <div className="flex justify-start w-full items-center m-2 px-8 py-4">

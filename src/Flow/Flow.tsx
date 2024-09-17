@@ -99,7 +99,7 @@ function Flow() {
             }}
             fitView
         >
-            <Panel position='bottom-left'><PanelParent /></Panel>
+            <Panel ><PanelParent /></Panel>
             <Background />
         </ReactFlow>
 

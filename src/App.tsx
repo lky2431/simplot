@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <div className='relative justify-center items-center min-w-screen min-h-screen m-0 flex flex-col bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]'>
+      <div className='relative min-w-screen min-h-screen m-0 flex flex-col bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]'>
         <Header />
         <div className='flex flex-col justify-start items-center h-screen m-0'>
           <div className='h-12'></div>

@@ -107,7 +107,7 @@ function DataSourceNode(props: NodeProps<DataSourceData>) {
                 </DialogHeader>
             </DialogContent>
         </Dialog>
-        <Input className='w-20 h-4 text-[8px] rounded p-1 text-center' placeholder='data label' onChangeCapture={(event)=>{
+        <Input className='w-20 h-4 text-[8px] rounded p-1 text-center' placeholder='data label' value={selfNodeData?.data.label} onChangeCapture={(event) => {
             updateNodeData(props.id, {
                 label: event.currentTarget.value
             })

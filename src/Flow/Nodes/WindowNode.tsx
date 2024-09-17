@@ -145,7 +145,7 @@ function WindowNode(props: NodeProps<WindowNodeData>) {
             <PropertiesCheckBox label="Legend" property='legend' value={selfNodeData?.data.window.legend ?? false} />
         </div>
 
-        <Input className='w-28 h-4 text-[8px] rounded p-1 text-center' placeholder='title' onChangeCapture={(event) => {
+        <Input className='w-28 h-4 text-[8px] rounded p-1 text-center' placeholder='title' value={selfNodeData?.data.window.title} onChangeCapture={(event) => {
             updateNodeData(props.id, {
                 window: {
                     ...selfNodeData?.data.window,
@@ -153,7 +153,7 @@ function WindowNode(props: NodeProps<WindowNodeData>) {
                 }
             })
         }} />
-        <Input className='w-28 h-4 text-[8px] rounded p-1 text-center' placeholder='x-axis label' onChangeCapture={(event) => {
+        <Input className='w-28 h-4 text-[8px] rounded p-1 text-center' placeholder='x-axis label' value={selfNodeData?.data.window.xAxisLabel} onChangeCapture={(event) => {
             updateNodeData(props.id, {
                 window: {
                     ...selfNodeData?.data.window,
@@ -161,7 +161,7 @@ function WindowNode(props: NodeProps<WindowNodeData>) {
                 }
             })
         }} />
-        <Input className='w-28 h-4 text-[8px] rounded p-1 text-center' placeholder='y-axis label' onChangeCapture={(event) => {
+        <Input className='w-28 h-4 text-[8px] rounded p-1 text-center' placeholder='y-axis label' value={selfNodeData?.data.window.yAxisLabel} onChangeCapture={(event) => {
             updateNodeData(props.id, {
                 window: {
                     ...selfNodeData?.data.window,
@@ -170,8 +170,6 @@ function WindowNode(props: NodeProps<WindowNodeData>) {
             })
         }} />
         <div className='h-1' />
-
-
 
         <Handle id={`${props.id}_w`} type="source" position={Position.Left} isConnectableEnd={false} className='w-2 h-2 bg-pink-500' />
         <Handle id={`${props.id}_c`} type="target" position={Position.Bottom} isConnectableStart={false} isConnectableEnd={cData.length < 1} className='w-2 h-2'><p className='absolute text-[9px] bottom-1.5 w-24'>frame color</p></Handle>
